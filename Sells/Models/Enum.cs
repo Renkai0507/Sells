@@ -8,6 +8,6 @@ namespace Sells.Models
 {
     enum BtnStatus
     {
-        New,Edit,Delete
+        New,Edit,Cancel,Delete
     }
 }

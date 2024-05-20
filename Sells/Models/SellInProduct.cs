@@ -27,6 +27,7 @@ namespace Sells.Models
         public string 產品備註 { set; get; }
         public string 成本 { set; get; }
         public string 發票編號 { set; get; }
+        
 
     }
     public enum 價格類別

@@ -31,13 +31,7 @@ namespace Sells.DB
             db.Close();
             return dbresult;//dbresult.ToList();
         }
-        //protected int ExecSQL(string SQLstr, T entity)
-        //{
-        //    if (db.State == ConnectionState.Closed) db.Open();
-        //    var dbresult = db.Execute(SQLstr,entity, commandType: CommandType.Text);
-        //    db.Close();
-        //    return dbresult;//dbresult.ToList();
-        //}
+       
         protected List<T> ConectSQL(string SQLstr, string[] Codes)
         {
             if (db.State == ConnectionState.Closed) db.Open();
@@ -125,6 +119,22 @@ namespace Sells.DB
             {
                 return null;
             }
+        }
+        protected string ArrayToSqlStrs(string Col,string[] Str )
+        {
+            string Result = string.Empty;
+            for (int i = 0; i <= Str.Length-1; i++)
+            {
+                if (string.IsNullOrEmpty(Str[i]))
+                    continue;
+
+                if (i>0)
+                {
+                    Result += " or ";
+                }
+                Result += $" {Col} like '%{Str[i]}%' ";
+            }
+            return Result;
         }
     }
 }

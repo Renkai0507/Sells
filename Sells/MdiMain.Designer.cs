@@ -34,8 +34,6 @@ namespace Sells
             this.商品資料建檔ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.客戶資料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.銷貨管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.門市管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.客戶紀錄查詢ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查詢產品紀錄ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entityCommand1 = new System.Data.Entity.Core.EntityClient.EntityCommand();
             this.menuStrip1.SuspendLayout();
@@ -47,8 +45,6 @@ namespace Sells
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.基本資料ToolStripMenuItem,
             this.銷貨管理ToolStripMenuItem,
-            this.門市管理ToolStripMenuItem,
-            this.客戶紀錄查詢ToolStripMenuItem,
             this.查詢產品紀錄ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -70,43 +66,29 @@ namespace Sells
             // 商品資料建檔ToolStripMenuItem
             // 
             this.商品資料建檔ToolStripMenuItem.Name = "商品資料建檔ToolStripMenuItem";
-            this.商品資料建檔ToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
-            this.商品資料建檔ToolStripMenuItem.Text = "商品資料建檔";
+            this.商品資料建檔ToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
+            this.商品資料建檔ToolStripMenuItem.Text = "商品資料建檔(F1)";
             this.商品資料建檔ToolStripMenuItem.Click += new System.EventHandler(this.商品資料建檔ToolStripMenuItem_Click);
             // 
             // 客戶資料ToolStripMenuItem
             // 
             this.客戶資料ToolStripMenuItem.Name = "客戶資料ToolStripMenuItem";
-            this.客戶資料ToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
-            this.客戶資料ToolStripMenuItem.Text = "客戶資料";
+            this.客戶資料ToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
+            this.客戶資料ToolStripMenuItem.Text = "客戶資料(F2)";
             this.客戶資料ToolStripMenuItem.Click += new System.EventHandler(this.客戶資料ToolStripMenuItem_Click);
             // 
             // 銷貨管理ToolStripMenuItem
             // 
             this.銷貨管理ToolStripMenuItem.Name = "銷貨管理ToolStripMenuItem";
-            this.銷貨管理ToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
-            this.銷貨管理ToolStripMenuItem.Text = "銷貨管理";
+            this.銷貨管理ToolStripMenuItem.Size = new System.Drawing.Size(112, 24);
+            this.銷貨管理ToolStripMenuItem.Text = "銷貨管理(F3)";
             this.銷貨管理ToolStripMenuItem.Click += new System.EventHandler(this.銷貨管理ToolStripMenuItem_Click);
-            // 
-            // 門市管理ToolStripMenuItem
-            // 
-            this.門市管理ToolStripMenuItem.Name = "門市管理ToolStripMenuItem";
-            this.門市管理ToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
-            this.門市管理ToolStripMenuItem.Text = "門市管理";
-            this.門市管理ToolStripMenuItem.Click += new System.EventHandler(this.門市管理ToolStripMenuItem_Click);
-            // 
-            // 客戶紀錄查詢ToolStripMenuItem
-            // 
-            this.客戶紀錄查詢ToolStripMenuItem.Name = "客戶紀錄查詢ToolStripMenuItem";
-            this.客戶紀錄查詢ToolStripMenuItem.Size = new System.Drawing.Size(117, 24);
-            this.客戶紀錄查詢ToolStripMenuItem.Text = "客戶紀錄查詢";
-            this.客戶紀錄查詢ToolStripMenuItem.Click += new System.EventHandler(this.客戶紀錄查詢ToolStripMenuItem_Click);
             // 
             // 查詢產品紀錄ToolStripMenuItem
             // 
             this.查詢產品紀錄ToolStripMenuItem.Name = "查詢產品紀錄ToolStripMenuItem";
-            this.查詢產品紀錄ToolStripMenuItem.Size = new System.Drawing.Size(117, 24);
-            this.查詢產品紀錄ToolStripMenuItem.Text = "查詢產品紀錄";
+            this.查詢產品紀錄ToolStripMenuItem.Size = new System.Drawing.Size(144, 24);
+            this.查詢產品紀錄ToolStripMenuItem.Text = "查詢產品紀錄(F4)";
             this.查詢產品紀錄ToolStripMenuItem.Click += new System.EventHandler(this.查詢產品紀錄ToolStripMenuItem_Click);
             // 
             // entityCommand1
@@ -121,15 +103,17 @@ namespace Sells
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1306, 737);
+            this.ClientSize = new System.Drawing.Size(1306, 861);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.IsMdiContainer = true;
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "MdiMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "批發系統";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MdiMain_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -144,8 +128,6 @@ namespace Sells
         private System.Windows.Forms.ToolStripMenuItem 商品資料建檔ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 客戶資料ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 銷貨管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 門市管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 客戶紀錄查詢ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查詢產品紀錄ToolStripMenuItem;
         private System.Data.Entity.Core.EntityClient.EntityCommand entityCommand1;
     }

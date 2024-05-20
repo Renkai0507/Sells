@@ -67,5 +67,26 @@ namespace Sells
         {
             sonfrm = new FrmProductRec(Db); newPage(sonfrm);
         }
+
+        private void MdiMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode==Keys.F1)
+            {
+                商品資料建檔ToolStripMenuItem.PerformClick();
+            }
+            if (e.KeyCode == Keys.F2)
+            {
+                客戶資料ToolStripMenuItem.PerformClick();
+            }
+            if (e.KeyCode == Keys.F3)
+            {
+                銷貨管理ToolStripMenuItem.PerformClick();
+            }
+            if (e.KeyCode == Keys.F4)
+            {
+                查詢產品紀錄ToolStripMenuItem.PerformClick();
+            }
+            
+        }
     }
 }
