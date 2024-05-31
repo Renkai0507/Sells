@@ -108,15 +108,17 @@ namespace Sells
             dgvSellsMonth.ClearSelection();
             dgvSellsMonth.FirstDisplayedScrollingRowIndex=dgvSellsMonth.RowCount-1;
             dgvSellsMonth.Rows[dgvSellsMonth.RowCount - 1].Selected = true;
-
+            dgvSells.DataSource = null;
 
         }
         private void BtnNewPdct_Click(object sender, EventArgs e)
         {
+            CountPrice(數量TextBox.Text);
             if (string.IsNullOrWhiteSpace(銷貨單號TextBox.Text.Trim()))
                 BtnNewMast.PerformClick();
             SelectPdct = GetnewSell();
             AddNewSells.Add(SelectPdct);
+            SetTotalPrice(SelectPdct.銷貨單號);
             dgvSells.DataSource = null;
             dgvSells.DataSource = AddNewSells;
             dgvSells.Refresh();
@@ -167,9 +169,14 @@ namespace Sells
             {
                 dgvSells.DataSource = null;
             }
-           
+            if (dgvSells.RowCount>=0)
+            {
+                //dgvSells.Rows[0].Selected = true;
+                SelectPdct = (SellInProduct)dgvSells.SelectedRows[0].DataBoundItem;
+                sellInProductBindingSource.DataSource = SelectPdct;
+                BtnSave.Enabled = true;
+            }
             
-
         }
 
         private void dgvSells_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -180,7 +187,7 @@ namespace Sells
             }
             SelectPdct =(SellInProduct) dgvSells.SelectedRows[0].DataBoundItem;
             sellInProductBindingSource.DataSource = SelectPdct;
-          
+            BtnSave.Enabled = true;
 
         }
 
@@ -212,7 +219,7 @@ namespace Sells
 
         private void 數量TextBox_TextChanged(object sender, EventArgs e)
         {
-            CountPrice(數量TextBox.Text);
+            //CountPrice(數量TextBox.Text);
         }
         void CountPrice(string Str)
         {
@@ -243,10 +250,42 @@ namespace Sells
             int Price = 0;
             int.TryParse(QtyStr,out Qty);
             int.TryParse(PriceStr, out Price);
-            金額TextBox.Text = PriceStr;
+            金額TextBox.Text = Price.ToString();
             小計TextBox.Text = (Qty * Price).ToString();
 
 
+        }
+        string SetTotalPrice(string SnNo)
+        {
+            string result = "0";
+            List<string> allprice;
+            var sellstotal = Db.Sells.GetPdcByKey(SnNo);
+            //舊的資料算總價
+            if (sellstotal!=null)
+            {
+                allprice= sellstotal.Select(X=>X.小計).ToList();
+                for (int i = 0; i < allprice.Count(); i++)
+                {
+                    int tmpprice = 0;
+                    int.TryParse(allprice[i], out tmpprice);
+                    result = (int.Parse(result) + tmpprice).ToString();
+                }
+                Db.Sells.SetTotal(SnNo, result);
+            }
+            else
+            {
+                //新加的算總價
+                allprice = AddNewSells.Select(X => X.小計).ToList();
+                for (int i = 0; i < allprice.Count(); i++)
+                {
+                    int tmpprice = 0;
+                    int.TryParse(allprice[i], out tmpprice);
+                    result = (int.Parse(result) + tmpprice).ToString();
+                }
+                AddNewSells.Where(X => X.銷貨單號 == SnNo).ToList().ForEach(Y => { Y.總金額 = result; });
+            }
+            return result;
+            
         }
         void SetPriceType()
         {
@@ -260,17 +299,17 @@ namespace Sells
 
         private void 零售價TextBox_TextChanged(object sender, EventArgs e)
         {
-            CountPrice(零售價TextBox.Text);
+            //CountPrice(零售價TextBox.Text);
         }
 
         private void 水電價TextBox_TextChanged(object sender, EventArgs e)
         {
-            CountPrice(水電價TextBox.Text);
+            //CountPrice(水電價TextBox.Text);
         }
 
         private void 安裝價TextBox_TextChanged(object sender, EventArgs e)
         {
-            CountPrice(安裝價TextBox.Text);
+            //CountPrice(安裝價TextBox.Text);
         }
 
         private void 客戶名稱TextBox_KeyDown(object sender, KeyEventArgs e)
@@ -291,20 +330,42 @@ namespace Sells
         
         private void rdbClient_CheckedChanged(object sender, EventArgs e)
         {
-            CountPrice(數量TextBox.Text);
+            //CountPrice(數量TextBox.Text);
         }
 
         private void rdbPro_CheckedChanged(object sender, EventArgs e)
         {
-            CountPrice(數量TextBox.Text);
+            //CountPrice(數量TextBox.Text);
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            AddNewSells.ForEach(X => { Db.Sells.AddNew(X); });
-            MastSells = Db.Sells.GetAllBySearch(dtpSellin.Value, txtSearchCus.Text, txtSearchPdct.Text);
+            //是否是新增的主黨
+            if (AddNewSells.Count>0)
+            {
+                AddNewSells.ForEach(X => {
+
+                    Db.Sells.AddNew(X);
+                });
+                return;
+            }           
+            string SnNo = Db.Sells.GetByKey(SelectPdct);
+            SelectPdct = GetnewSell();
+            if (SnNo == "0")
+            {
+                Db.Sells.AddNew(SelectPdct);
+            }
+            else
+            {
+                SelectPdct.項次 = SnNo;
+                Db.Sells.Edit(SelectPdct);
+            }
+            AddNewSells.Clear();
+            SetTotalPrice(SelectPdct.銷貨單號);
+            MastSells = Db.Sells.GetAllByDate(dtpSellin.Value);
             dgvSellsMonth.DataSource = MastSells;
             dgvSells.DataSource = null;
+            銷貨單號TextBox.Text = "";
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -432,6 +493,44 @@ namespace Sells
         private void BtnPrint_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dtpSellin_ValueChanged(object sender, EventArgs e)
+        {
+            MastSells = Db.Sells.GetAllByDate(dtpSellin.Value);
+            dgvSellsMonth.DataSource = MastSells;
+        }
+
+        private void 數量TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode==Keys.Enter)
+            {
+                CountPrice(數量TextBox.Text);
+            }
+        }
+
+        private void 零售價TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                CountPrice(零售價TextBox.Text);
+            }
+        }
+
+        private void 水電價TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                CountPrice(水電價TextBox.Text);
+            }
+        }
+
+        private void 安裝價TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                CountPrice(安裝價TextBox.Text);
+            }
         }
     }
 }

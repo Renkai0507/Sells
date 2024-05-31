@@ -29,6 +29,7 @@ namespace Sells.DB
             var dbresult = ConectSQL(Sqlstr, Dp);
             return dbresult;
         }
+        
 
 
         internal List<SellInProduct> GetAllBySearch(DateTime date, string Cus,string Pdct)
@@ -54,6 +55,9 @@ namespace Sells.DB
             return dbresult;
 
         }
+
+       
+
         public bool AddNew(SellInProduct entity)
         {
             string SnNo = GetSnno(entity);
@@ -68,11 +72,25 @@ values ('{entity.銷貨單號}',{SnNo},'{DateStr}','{entity.客戶編號}','{ent
             return dbresult == 1;
         }
 
-        private string GetSnno(SellInProduct entity)
+        public string GetSnno(SellInProduct entity)
         {
             string Sqlstr = $@"SELECT  銷貨單號 FROM SellInProduct WHERE 銷貨單號='{entity.銷貨單號}' ";
-
-            return (ConectSQL(Sqlstr, entity).Count+1).ToString();
+            var sli = ConectSQL(Sqlstr, entity);
+            if (sli==null)
+            {
+                return "1";
+            }
+            return ( sli.Count + 1).ToString();
+        }
+        public string GetByKey(SellInProduct entity)
+        {
+            string Sqlstr = $@"SELECT  銷貨單號,項次 FROM SellInProduct WHERE 銷貨單號='{entity.銷貨單號}' and 項次='{entity.項次}' ";
+            var sli = ConectSQL(Sqlstr, entity);
+            if (sli == null)
+            {
+                return "0";
+            }
+            return (sli.FirstOrDefault().項次 ).ToString();
         }
 
         public bool Edit(SellInProduct entity)
@@ -82,7 +100,7 @@ values ('{entity.銷貨單號}',{SnNo},'{DateStr}','{entity.客戶編號}','{ent
             string Sqlstr = $@"UPDATE SellInProduct Set 銷貨日期='{DateStr}',
                             客戶編號='{entity.客戶編號}',客戶名稱='{entity.客戶名稱}',總金額='{entity.總金額}',備註='{entity.備註}',產品編號='{entity.產品編號}',光源='{entity.光源}',數量='{entity.數量}',
                             水電價='{entity.水電價}',安裝價='{entity.安裝價}',零售價='{entity.零售價}',金額='{entity.金額}',小計='{entity.小計}'
-                            ,產品備註='{entity.產品備註}',成本='{entity.成本}',小計='{entity.發票編號}'
+                            ,產品備註='{entity.產品備註}',成本='{entity.成本}',發票編號='{entity.發票編號}'
 WHERE 銷貨單號='{entity.銷貨單號}' and 項次='{entity.項次}'";
             int dbresult = ExecSQL(Sqlstr, entity);
             return dbresult == 1;
@@ -110,6 +128,15 @@ WHERE 銷貨單號='{entity.銷貨單號}' and 項次='{entity.項次}'";
             Dp.Add("DateStr", 銷貨單號);
             var dbresult = ConectSQL(Sqlstr, Dp);
             return dbresult;
+        }
+
+        internal void SetTotal(string snNo, string result)
+        {
+           
+            string Sqlstr = $@"UPDATE SellInProduct Set 總金額='{result}'
+WHERE 銷貨單號='{snNo}'";
+            int dbresult = ExecSQL(Sqlstr);
+           
         }
     }
 }

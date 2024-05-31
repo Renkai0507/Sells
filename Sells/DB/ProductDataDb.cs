@@ -71,10 +71,10 @@ values ({entity.產品編號},{entity.產品規格},{entity.單位},{entity.進�
         }
         public bool Edit(PopularProduct entity)
         {
-            string Sqlstr = $@"UPDATE PopularProduct Set 產品規格=@產品規格,單位=@單位,
-                            進價價錢={entity.進價價錢},水電價={entity.水電價},安裝價={entity.安裝價}
-,零售價錢={entity.零售價錢},備註={entity.備註},進貨日期={entity.進貨日期},地址={entity.地址}
-                            WHERE 產品編號={entity.產品編號}
+            string Sqlstr = $@"UPDATE PopularProduct Set 產品規格='{entity.產品規格}',單位='{entity.單位}',
+                            進價價錢='{entity.進價價錢}',水電價='{entity.水電價}',安裝價='{entity.安裝價}'
+,零售價錢='{entity.零售價錢}',備註='{entity.備註}',進貨日期='{entity.進貨日期.Year}/{entity.進貨日期.Month}/{entity.進貨日期.Day}',地址='{entity.地址}'
+                            WHERE 產品編號='{entity.產品編號}'
 
 ";
             int dbresult = ExecSQL(Sqlstr, entity);

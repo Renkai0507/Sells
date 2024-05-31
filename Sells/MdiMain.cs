@@ -57,15 +57,15 @@ namespace Sells
 
         private void 門市管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            sonfrm = new FrmStore(Db); newPage(sonfrm);
+            sonfrm = new FrmReport(Db); newPage(sonfrm);
         }
         private void 客戶紀錄查詢ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            sonfrm = new FrmCustomRec(Db); newPage(sonfrm);
+            //sonfrm = new FrmCustomRec(Db); newPage(sonfrm);
         }
         private void 查詢產品紀錄ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            sonfrm = new FrmProductRec(Db); newPage(sonfrm);
+            sonfrm = new FrmReport(Db); newPage(sonfrm);
         }
 
         private void MdiMain_KeyDown(object sender, KeyEventArgs e)

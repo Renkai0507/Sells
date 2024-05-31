@@ -60,15 +60,21 @@ namespace Sells
             this.txtSearchPdct = new System.Windows.Forms.TextBox();
             this.dtpSellin = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearchCus = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnExit = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnNewPdct = new System.Windows.Forms.Button();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnPrint = new System.Windows.Forms.Button();
             this.dgvSells = new System.Windows.Forms.DataGridView();
+            this.sellInProductBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rdbClient = new System.Windows.Forms.RadioButton();
             this.rdbSet = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnNewMast = new System.Windows.Forms.Button();
             this.rdbPro = new System.Windows.Forms.RadioButton();
             this.備註TextBox = new System.Windows.Forms.TextBox();
             this.總金額TextBox = new System.Windows.Forms.TextBox();
@@ -90,28 +96,24 @@ namespace Sells
             this.光源TextBox = new System.Windows.Forms.TextBox();
             this.產品編號TextBox = new System.Windows.Forms.TextBox();
             this.dgvSellsMonth = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bgwSearch = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnSave = new System.Windows.Forms.Button();
             this.entityCommand1 = new System.Data.Entity.Core.EntityClient.EntityCommand();
             this.Cmspdct = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.刪除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CmsMoth = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnCancel = new System.Windows.Forms.Button();
-            this.BtnSave = new System.Windows.Forms.Button();
-            this.BtnNewPdct = new System.Windows.Forms.Button();
-            this.BtnNewMast = new System.Windows.Forms.Button();
-            this.BtnPrint = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.entityCommand2 = new System.Data.Entity.Core.EntityClient.EntityCommand();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellInProductBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.光源 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -120,7 +122,6 @@ namespace Sells
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             label7 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -153,6 +154,7 @@ namespace Sells
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSells)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sellInProductBindingSource)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -161,7 +163,6 @@ namespace Sells
             this.tableLayoutPanel4.SuspendLayout();
             this.Cmspdct.SuspendLayout();
             this.CmsMoth.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sellInProductBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label7
@@ -265,7 +266,7 @@ namespace Sells
             // 小計Label
             // 
             小計Label.AutoSize = true;
-            小計Label.Location = new System.Drawing.Point(428, 132);
+            小計Label.Location = new System.Drawing.Point(485, 132);
             小計Label.Name = "小計Label";
             小計Label.Size = new System.Drawing.Size(44, 16);
             小計Label.TabIndex = 9;
@@ -301,7 +302,7 @@ namespace Sells
             // 光源Label
             // 
             光源Label.AutoSize = true;
-            光源Label.Location = new System.Drawing.Point(25, 88);
+            光源Label.Location = new System.Drawing.Point(25, 90);
             光源Label.Name = "光源Label";
             光源Label.Size = new System.Drawing.Size(76, 16);
             光源Label.TabIndex = 2;
@@ -310,7 +311,7 @@ namespace Sells
             // 數量Label
             // 
             數量Label.AutoSize = true;
-            數量Label.Location = new System.Drawing.Point(57, 135);
+            數量Label.Location = new System.Drawing.Point(48, 135);
             數量Label.Name = "數量Label";
             數量Label.Size = new System.Drawing.Size(44, 16);
             數量Label.TabIndex = 4;
@@ -319,7 +320,7 @@ namespace Sells
             // 金額Label
             // 
             金額Label.AutoSize = true;
-            金額Label.Location = new System.Drawing.Point(428, 93);
+            金額Label.Location = new System.Drawing.Point(485, 93);
             金額Label.Name = "金額Label";
             金額Label.Size = new System.Drawing.Size(44, 16);
             金額Label.TabIndex = 6;
@@ -328,7 +329,7 @@ namespace Sells
             // 零售價Label
             // 
             零售價Label.AutoSize = true;
-            零售價Label.Location = new System.Drawing.Point(226, 48);
+            零售價Label.Location = new System.Drawing.Point(283, 48);
             零售價Label.Name = "零售價Label";
             零售價Label.Size = new System.Drawing.Size(60, 16);
             零售價Label.TabIndex = 8;
@@ -337,7 +338,7 @@ namespace Sells
             // 水電價Label
             // 
             水電價Label.AutoSize = true;
-            水電價Label.Location = new System.Drawing.Point(226, 90);
+            水電價Label.Location = new System.Drawing.Point(283, 90);
             水電價Label.Name = "水電價Label";
             水電價Label.Size = new System.Drawing.Size(60, 16);
             水電價Label.TabIndex = 10;
@@ -346,7 +347,7 @@ namespace Sells
             // 安裝價Label
             // 
             安裝價Label.AutoSize = true;
-            安裝價Label.Location = new System.Drawing.Point(226, 132);
+            安裝價Label.Location = new System.Drawing.Point(283, 132);
             安裝價Label.Name = "安裝價Label";
             安裝價Label.Size = new System.Drawing.Size(60, 16);
             安裝價Label.TabIndex = 12;
@@ -364,7 +365,7 @@ namespace Sells
             // 牌價Label
             // 
             牌價Label.AutoSize = true;
-            牌價Label.Location = new System.Drawing.Point(428, 49);
+            牌價Label.Location = new System.Drawing.Point(485, 49);
             牌價Label.Name = "牌價Label";
             牌價Label.Size = new System.Drawing.Size(44, 16);
             牌價Label.TabIndex = 18;
@@ -449,6 +450,7 @@ namespace Sells
             this.dtpSellin.Name = "dtpSellin";
             this.dtpSellin.Size = new System.Drawing.Size(151, 27);
             this.dtpSellin.TabIndex = 31;
+            this.dtpSellin.ValueChanged += new System.EventHandler(this.dtpSellin_ValueChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -463,6 +465,19 @@ namespace Sells
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.27119F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(66, 76);
             this.tableLayoutPanel1.TabIndex = 29;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackgroundImage = global::Sells.Properties.Resources.SearchIcon;
+            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSearch.Location = new System.Drawing.Point(3, 3);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(60, 50);
+            this.btnSearch.TabIndex = 26;
+            this.btnSearch.TabStop = false;
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtSearchCus
             // 
@@ -488,6 +503,20 @@ namespace Sells
             this.tableLayoutPanel6.Size = new System.Drawing.Size(71, 79);
             this.tableLayoutPanel6.TabIndex = 106;
             // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.Color.Red;
+            this.btnExit.BackgroundImage = global::Sells.Properties.Resources.logout;
+            this.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnExit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnExit.Location = new System.Drawing.Point(3, 3);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(65, 52);
+            this.btnExit.TabIndex = 26;
+            this.btnExit.TabStop = false;
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
@@ -501,6 +530,20 @@ namespace Sells
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.27119F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(71, 80);
             this.tableLayoutPanel2.TabIndex = 102;
+            // 
+            // BtnNewPdct
+            // 
+            this.BtnNewPdct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.BtnNewPdct.BackgroundImage = global::Sells.Properties.Resources.addicon;
+            this.BtnNewPdct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnNewPdct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnNewPdct.Location = new System.Drawing.Point(3, 3);
+            this.BtnNewPdct.Name = "BtnNewPdct";
+            this.BtnNewPdct.Size = new System.Drawing.Size(65, 52);
+            this.BtnNewPdct.TabIndex = 26;
+            this.BtnNewPdct.TabStop = false;
+            this.BtnNewPdct.UseVisualStyleBackColor = false;
+            this.BtnNewPdct.Click += new System.EventHandler(this.BtnNewPdct_Click);
             // 
             // tableLayoutPanel8
             // 
@@ -516,6 +559,20 @@ namespace Sells
             this.tableLayoutPanel8.Size = new System.Drawing.Size(71, 79);
             this.tableLayoutPanel8.TabIndex = 108;
             // 
+            // BtnPrint
+            // 
+            this.BtnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.BtnPrint.BackgroundImage = global::Sells.Properties.Resources.excel_icon;
+            this.BtnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnPrint.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnPrint.Location = new System.Drawing.Point(3, 3);
+            this.BtnPrint.Name = "BtnPrint";
+            this.BtnPrint.Size = new System.Drawing.Size(65, 52);
+            this.BtnPrint.TabIndex = 26;
+            this.BtnPrint.TabStop = false;
+            this.BtnPrint.UseVisualStyleBackColor = false;
+            this.BtnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
+            // 
             // dgvSells
             // 
             this.dgvSells.AllowUserToAddRows = false;
@@ -525,6 +582,7 @@ namespace Sells
             this.dgvSells.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8,
+            this.光源,
             this.dataGridViewTextBoxColumn10,
             this.dataGridViewTextBoxColumn11,
             this.dataGridViewTextBoxColumn12,
@@ -536,6 +594,7 @@ namespace Sells
             this.dgvSells.DataSource = this.sellInProductBindingSource;
             this.dgvSells.Location = new System.Drawing.Point(12, 518);
             this.dgvSells.Name = "dgvSells";
+            this.dgvSells.ReadOnly = true;
             this.dgvSells.RowTemplate.Height = 24;
             this.dgvSells.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSells.Size = new System.Drawing.Size(1267, 226);
@@ -543,6 +602,10 @@ namespace Sells
             this.dgvSells.TabStop = false;
             this.dgvSells.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSells_CellClick);
             this.dgvSells.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvSells_CellMouseDown);
+            // 
+            // sellInProductBindingSource
+            // 
+            this.sellInProductBindingSource.DataSource = typeof(Sells.Models.SellInProduct);
             // 
             // groupBox2
             // 
@@ -607,6 +670,20 @@ namespace Sells
             this.tableLayoutPanel3.Size = new System.Drawing.Size(71, 79);
             this.tableLayoutPanel3.TabIndex = 112;
             // 
+            // BtnNewMast
+            // 
+            this.BtnNewMast.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.BtnNewMast.BackgroundImage = global::Sells.Properties.Resources.addicon;
+            this.BtnNewMast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnNewMast.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnNewMast.Location = new System.Drawing.Point(3, 3);
+            this.BtnNewMast.Name = "BtnNewMast";
+            this.BtnNewMast.Size = new System.Drawing.Size(65, 52);
+            this.BtnNewMast.TabIndex = 26;
+            this.BtnNewMast.TabStop = false;
+            this.BtnNewMast.UseVisualStyleBackColor = false;
+            this.BtnNewMast.Click += new System.EventHandler(this.BtnNewMast_Click);
+            // 
             // rdbPro
             // 
             this.rdbPro.AutoSize = true;
@@ -641,7 +718,7 @@ namespace Sells
             this.發票編號TextBox.Location = new System.Drawing.Point(455, 59);
             this.發票編號TextBox.Name = "發票編號TextBox";
             this.發票編號TextBox.Size = new System.Drawing.Size(100, 27);
-            this.發票編號TextBox.TabIndex = 4;
+            this.發票編號TextBox.TabIndex = 2;
             // 
             // 客戶名稱TextBox
             // 
@@ -651,7 +728,7 @@ namespace Sells
             this.客戶名稱TextBox.Location = new System.Drawing.Point(204, 59);
             this.客戶名稱TextBox.Name = "客戶名稱TextBox";
             this.客戶名稱TextBox.Size = new System.Drawing.Size(144, 27);
-            this.客戶名稱TextBox.TabIndex = 2;
+            this.客戶名稱TextBox.TabIndex = 1;
             this.客戶名稱TextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.客戶名稱TextBox_KeyDown);
             // 
             // 客戶編號TextBox
@@ -666,9 +743,9 @@ namespace Sells
             this.客戶編號TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sellInProductBindingSource, "客戶編號", true));
             this.客戶編號TextBox.Location = new System.Drawing.Point(98, 59);
             this.客戶編號TextBox.Name = "客戶編號TextBox";
-            this.客戶編號TextBox.ReadOnly = true;
             this.客戶編號TextBox.Size = new System.Drawing.Size(100, 27);
-            this.客戶編號TextBox.TabIndex = 5;
+            this.客戶編號TextBox.TabIndex = 0;
+            this.客戶編號TextBox.TabStop = false;
             // 
             // 銷貨單號TextBox
             // 
@@ -677,7 +754,7 @@ namespace Sells
             this.銷貨單號TextBox.Name = "銷貨單號TextBox";
             this.銷貨單號TextBox.ReadOnly = true;
             this.銷貨單號TextBox.Size = new System.Drawing.Size(100, 27);
-            this.銷貨單號TextBox.TabIndex = 3;
+            this.銷貨單號TextBox.TabIndex = 4;
             // 
             // 銷貨日期DateTimePicker
             // 
@@ -687,14 +764,16 @@ namespace Sells
             this.銷貨日期DateTimePicker.Name = "銷貨日期DateTimePicker";
             this.銷貨日期DateTimePicker.Size = new System.Drawing.Size(200, 27);
             this.銷貨日期DateTimePicker.TabIndex = 1;
+            this.銷貨日期DateTimePicker.TabStop = false;
             // 
             // 小計TextBox
             // 
             this.小計TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sellInProductBindingSource, "小計", true));
-            this.小計TextBox.Location = new System.Drawing.Point(478, 129);
+            this.小計TextBox.Location = new System.Drawing.Point(535, 129);
             this.小計TextBox.Name = "小計TextBox";
             this.小計TextBox.Size = new System.Drawing.Size(100, 27);
             this.小計TextBox.TabIndex = 13;
+            this.小計TextBox.Text = "0";
             // 
             // groupBox3
             // 
@@ -730,7 +809,7 @@ namespace Sells
             // 含稅Ckb
             // 
             this.含稅Ckb.AutoSize = true;
-            this.含稅Ckb.Location = new System.Drawing.Point(623, 47);
+            this.含稅Ckb.Location = new System.Drawing.Point(699, 47);
             this.含稅Ckb.Name = "含稅Ckb";
             this.含稅Ckb.Size = new System.Drawing.Size(59, 20);
             this.含稅Ckb.TabIndex = 15;
@@ -740,10 +819,11 @@ namespace Sells
             // 牌價TextBox
             // 
             this.牌價TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sellInProductBindingSource, "牌價", true));
-            this.牌價TextBox.Location = new System.Drawing.Point(478, 46);
+            this.牌價TextBox.Location = new System.Drawing.Point(535, 46);
             this.牌價TextBox.Name = "牌價TextBox";
             this.牌價TextBox.Size = new System.Drawing.Size(100, 27);
             this.牌價TextBox.TabIndex = 11;
+            this.牌價TextBox.Text = "0";
             this.牌價TextBox.Visible = false;
             // 
             // 產品備註TextBox
@@ -757,40 +837,44 @@ namespace Sells
             // 安裝價TextBox
             // 
             this.安裝價TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sellInProductBindingSource, "安裝價", true));
-            this.安裝價TextBox.Location = new System.Drawing.Point(292, 129);
+            this.安裝價TextBox.Location = new System.Drawing.Point(349, 129);
             this.安裝價TextBox.Name = "安裝價TextBox";
             this.安裝價TextBox.Size = new System.Drawing.Size(100, 27);
             this.安裝價TextBox.TabIndex = 10;
             this.安裝價TextBox.Text = "0";
             this.安裝價TextBox.TextChanged += new System.EventHandler(this.安裝價TextBox_TextChanged);
+            this.安裝價TextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.安裝價TextBox_KeyDown);
             // 
             // 水電價TextBox
             // 
             this.水電價TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sellInProductBindingSource, "水電價", true));
-            this.水電價TextBox.Location = new System.Drawing.Point(292, 87);
+            this.水電價TextBox.Location = new System.Drawing.Point(349, 87);
             this.水電價TextBox.Name = "水電價TextBox";
             this.水電價TextBox.Size = new System.Drawing.Size(100, 27);
             this.水電價TextBox.TabIndex = 9;
             this.水電價TextBox.Text = "0";
             this.水電價TextBox.TextChanged += new System.EventHandler(this.水電價TextBox_TextChanged);
+            this.水電價TextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.水電價TextBox_KeyDown);
             // 
             // 零售價TextBox
             // 
             this.零售價TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sellInProductBindingSource, "零售價", true));
-            this.零售價TextBox.Location = new System.Drawing.Point(292, 45);
+            this.零售價TextBox.Location = new System.Drawing.Point(349, 45);
             this.零售價TextBox.Name = "零售價TextBox";
             this.零售價TextBox.Size = new System.Drawing.Size(100, 27);
             this.零售價TextBox.TabIndex = 8;
             this.零售價TextBox.Text = "0";
             this.零售價TextBox.TextChanged += new System.EventHandler(this.零售價TextBox_TextChanged);
+            this.零售價TextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.零售價TextBox_KeyDown);
             // 
             // 金額TextBox
             // 
             this.金額TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sellInProductBindingSource, "金額", true));
-            this.金額TextBox.Location = new System.Drawing.Point(478, 90);
+            this.金額TextBox.Location = new System.Drawing.Point(535, 90);
             this.金額TextBox.Name = "金額TextBox";
             this.金額TextBox.Size = new System.Drawing.Size(100, 27);
             this.金額TextBox.TabIndex = 12;
+            this.金額TextBox.Text = "0";
             // 
             // 數量TextBox
             // 
@@ -801,6 +885,7 @@ namespace Sells
             this.數量TextBox.TabIndex = 7;
             this.數量TextBox.Text = "0";
             this.數量TextBox.TextChanged += new System.EventHandler(this.數量TextBox_TextChanged);
+            this.數量TextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.數量TextBox_KeyDown);
             this.數量TextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.數量TextBox_KeyPress);
             // 
             // 光源TextBox
@@ -808,9 +893,9 @@ namespace Sells
             this.光源TextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.光源TextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.光源TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sellInProductBindingSource, "光源", true));
-            this.光源TextBox.Location = new System.Drawing.Point(107, 85);
+            this.光源TextBox.Location = new System.Drawing.Point(107, 87);
             this.光源TextBox.Name = "光源TextBox";
-            this.光源TextBox.Size = new System.Drawing.Size(100, 27);
+            this.光源TextBox.Size = new System.Drawing.Size(170, 27);
             this.光源TextBox.TabIndex = 6;
             this.光源TextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.光源TextBox_KeyDown);
             // 
@@ -835,6 +920,7 @@ namespace Sells
             this.dgvSellsMonth.DataSource = this.sellInProductBindingSource;
             this.dgvSellsMonth.Location = new System.Drawing.Point(862, 125);
             this.dgvSellsMonth.Name = "dgvSellsMonth";
+            this.dgvSellsMonth.ReadOnly = true;
             this.dgvSellsMonth.RowTemplate.Height = 24;
             this.dgvSellsMonth.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSellsMonth.Size = new System.Drawing.Size(443, 387);
@@ -842,6 +928,29 @@ namespace Sells
             this.dgvSellsMonth.TabStop = false;
             this.dgvSellsMonth.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSellsMonth_CellClick);
             this.dgvSellsMonth.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvSellsMonth_CellMouseDown);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "銷貨單號";
+            this.dataGridViewTextBoxColumn1.HeaderText = "銷貨單號";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "銷貨日期";
+            this.dataGridViewTextBoxColumn2.HeaderText = "銷貨日期";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "客戶名稱";
+            this.dataGridViewTextBoxColumn4.HeaderText = "客戶名稱";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 150;
             // 
             // tableLayoutPanel7
             // 
@@ -857,6 +966,20 @@ namespace Sells
             this.tableLayoutPanel7.Size = new System.Drawing.Size(74, 79);
             this.tableLayoutPanel7.TabIndex = 114;
             // 
+            // BtnCancel
+            // 
+            this.BtnCancel.BackColor = System.Drawing.Color.White;
+            this.BtnCancel.BackgroundImage = global::Sells.Properties.Resources.cancel;
+            this.BtnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnCancel.Location = new System.Drawing.Point(3, 3);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(68, 52);
+            this.BtnCancel.TabIndex = 26;
+            this.BtnCancel.TabStop = false;
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
@@ -871,6 +994,21 @@ namespace Sells
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(74, 79);
             this.tableLayoutPanel4.TabIndex = 113;
+            // 
+            // BtnSave
+            // 
+            this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.BtnSave.BackgroundImage = global::Sells.Properties.Resources.SaveIcon1;
+            this.BtnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnSave.Enabled = false;
+            this.BtnSave.Location = new System.Drawing.Point(3, 3);
+            this.BtnSave.Name = "BtnSave";
+            this.BtnSave.Size = new System.Drawing.Size(68, 52);
+            this.BtnSave.TabIndex = 26;
+            this.BtnSave.TabStop = false;
+            this.BtnSave.UseVisualStyleBackColor = false;
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // entityCommand1
             // 
@@ -908,104 +1046,6 @@ namespace Sells
             this.toolStripMenuItem1.Text = "刪除";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
-            // BtnCancel
-            // 
-            this.BtnCancel.BackColor = System.Drawing.Color.White;
-            this.BtnCancel.BackgroundImage = global::Sells.Properties.Resources.cancel;
-            this.BtnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnCancel.Location = new System.Drawing.Point(3, 3);
-            this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new System.Drawing.Size(68, 52);
-            this.BtnCancel.TabIndex = 26;
-            this.BtnCancel.TabStop = false;
-            this.BtnCancel.UseVisualStyleBackColor = false;
-            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
-            // 
-            // BtnSave
-            // 
-            this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.BtnSave.BackgroundImage = global::Sells.Properties.Resources.SaveIcon1;
-            this.BtnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnSave.Enabled = false;
-            this.BtnSave.Location = new System.Drawing.Point(3, 3);
-            this.BtnSave.Name = "BtnSave";
-            this.BtnSave.Size = new System.Drawing.Size(68, 52);
-            this.BtnSave.TabIndex = 26;
-            this.BtnSave.TabStop = false;
-            this.BtnSave.UseVisualStyleBackColor = false;
-            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
-            // 
-            // BtnNewPdct
-            // 
-            this.BtnNewPdct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.BtnNewPdct.BackgroundImage = global::Sells.Properties.Resources.addicon;
-            this.BtnNewPdct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnNewPdct.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnNewPdct.Location = new System.Drawing.Point(3, 3);
-            this.BtnNewPdct.Name = "BtnNewPdct";
-            this.BtnNewPdct.Size = new System.Drawing.Size(65, 52);
-            this.BtnNewPdct.TabIndex = 26;
-            this.BtnNewPdct.TabStop = false;
-            this.BtnNewPdct.UseVisualStyleBackColor = false;
-            this.BtnNewPdct.Click += new System.EventHandler(this.BtnNewPdct_Click);
-            // 
-            // BtnNewMast
-            // 
-            this.BtnNewMast.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.BtnNewMast.BackgroundImage = global::Sells.Properties.Resources.addicon;
-            this.BtnNewMast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnNewMast.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnNewMast.Location = new System.Drawing.Point(3, 3);
-            this.BtnNewMast.Name = "BtnNewMast";
-            this.BtnNewMast.Size = new System.Drawing.Size(65, 52);
-            this.BtnNewMast.TabIndex = 26;
-            this.BtnNewMast.TabStop = false;
-            this.BtnNewMast.UseVisualStyleBackColor = false;
-            this.BtnNewMast.Click += new System.EventHandler(this.BtnNewMast_Click);
-            // 
-            // BtnPrint
-            // 
-            this.BtnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.BtnPrint.BackgroundImage = global::Sells.Properties.Resources.excel_icon;
-            this.BtnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnPrint.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnPrint.Location = new System.Drawing.Point(3, 3);
-            this.BtnPrint.Name = "BtnPrint";
-            this.BtnPrint.Size = new System.Drawing.Size(65, 52);
-            this.BtnPrint.TabIndex = 26;
-            this.BtnPrint.TabStop = false;
-            this.BtnPrint.UseVisualStyleBackColor = false;
-            this.BtnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.BackColor = System.Drawing.Color.Red;
-            this.btnExit.BackgroundImage = global::Sells.Properties.Resources.logout;
-            this.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnExit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnExit.Location = new System.Drawing.Point(3, 3);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(65, 52);
-            this.btnExit.TabIndex = 26;
-            this.btnExit.TabStop = false;
-            this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackgroundImage = global::Sells.Properties.Resources.SearchIcon;
-            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSearch.Location = new System.Drawing.Point(3, 3);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(60, 50);
-            this.btnSearch.TabIndex = 26;
-            this.btnSearch.TabStop = false;
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
             // entityCommand2
             // 
             this.entityCommand2.CommandTimeout = 0;
@@ -1014,94 +1054,6 @@ namespace Sells
             this.entityCommand2.EnablePlanCaching = true;
             this.entityCommand2.Transaction = null;
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "銷貨單號";
-            this.dataGridViewTextBoxColumn1.HeaderText = "銷貨單號";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 150;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "銷貨日期";
-            this.dataGridViewTextBoxColumn2.HeaderText = "銷貨日期";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "客戶名稱";
-            this.dataGridViewTextBoxColumn4.HeaderText = "客戶名稱";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 150;
-            // 
-            // sellInProductBindingSource
-            // 
-            this.sellInProductBindingSource.DataSource = typeof(Sells.Models.SellInProduct);
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "項次";
-            this.dataGridViewTextBoxColumn7.HeaderText = "項次";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "產品編號";
-            this.dataGridViewTextBoxColumn8.HeaderText = "產品編號";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "數量";
-            this.dataGridViewTextBoxColumn10.HeaderText = "數量";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "水電價";
-            this.dataGridViewTextBoxColumn11.HeaderText = "水電價";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "安裝價";
-            this.dataGridViewTextBoxColumn12.HeaderText = "安裝價";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "零售價";
-            this.dataGridViewTextBoxColumn13.HeaderText = "零售價";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "金額";
-            this.dataGridViewTextBoxColumn14.HeaderText = "金額";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "牌價";
-            this.dataGridViewTextBoxColumn15.HeaderText = "牌價";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "小計";
-            this.dataGridViewTextBoxColumn16.HeaderText = "小計";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.DataPropertyName = "產品備註";
-            this.dataGridViewTextBoxColumn17.HeaderText = "產品備註";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.Width = 180;
-            // 
             // crystalReportViewer1
             // 
             this.crystalReportViewer1.ActiveViewIndex = -1;
@@ -1109,6 +1061,89 @@ namespace Sells
             this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
             this.crystalReportViewer1.TabIndex = 0;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "項次";
+            this.dataGridViewTextBoxColumn7.HeaderText = "項次";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "產品編號";
+            this.dataGridViewTextBoxColumn8.HeaderText = "產品編號";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 120;
+            // 
+            // 光源
+            // 
+            this.光源.DataPropertyName = "光源";
+            this.光源.HeaderText = "產品名稱";
+            this.光源.Name = "光源";
+            this.光源.ReadOnly = true;
+            this.光源.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "數量";
+            this.dataGridViewTextBoxColumn10.HeaderText = "數量";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "水電價";
+            this.dataGridViewTextBoxColumn11.HeaderText = "水電價";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "安裝價";
+            this.dataGridViewTextBoxColumn12.HeaderText = "安裝價";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "零售價";
+            this.dataGridViewTextBoxColumn13.HeaderText = "零售價";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "金額";
+            this.dataGridViewTextBoxColumn14.HeaderText = "金額";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "牌價";
+            this.dataGridViewTextBoxColumn15.HeaderText = "牌價";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            this.dataGridViewTextBoxColumn15.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "小計";
+            this.dataGridViewTextBoxColumn16.HeaderText = "小計";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.DataPropertyName = "產品備註";
+            this.dataGridViewTextBoxColumn17.HeaderText = "產品備註";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            this.dataGridViewTextBoxColumn17.Width = 250;
             // 
             // FrmSell
             // 
@@ -1141,6 +1176,7 @@ namespace Sells
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSells)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sellInProductBindingSource)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -1154,7 +1190,6 @@ namespace Sells
             this.tableLayoutPanel4.PerformLayout();
             this.Cmspdct.ResumeLayout(false);
             this.CmsMoth.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.sellInProductBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1211,8 +1246,15 @@ namespace Sells
         private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.TextBox txtSearchPdct;
         private System.Data.Entity.Core.EntityClient.EntityCommand entityCommand1;
+        private System.Windows.Forms.ContextMenuStrip Cmspdct;
+        private System.Windows.Forms.ToolStripMenuItem 刪除ToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip CmsMoth;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Data.Entity.Core.EntityClient.EntityCommand entityCommand2;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 光源;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
@@ -1221,11 +1263,5 @@ namespace Sells
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private System.Windows.Forms.ContextMenuStrip Cmspdct;
-        private System.Windows.Forms.ToolStripMenuItem 刪除ToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip CmsMoth;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Data.Entity.Core.EntityClient.EntityCommand entityCommand2;
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
     }
 }

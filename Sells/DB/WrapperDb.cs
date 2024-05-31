@@ -5,6 +5,8 @@ namespace Sells
 {
     public interface IDbServiceWrapper
     {
+        PdctRptDb PdctRpt { get; }
+        CustRptDb CustRpt { get; }
         PopularProductDb ProductData { get; }
         CustomerDataDb CustomerData { get; }
         SellsDb Sells { get; }
@@ -19,5 +21,8 @@ namespace Sells
         public PopularProductDb ProductData => new PopularProductDb(conn);
         public CustomerDataDb CustomerData => new CustomerDataDb(conn);
         public SellsDb Sells =>  new SellsDb(conn);
+
+        public CustRptDb CustRpt => new CustRptDb(conn);
+        public PdctRptDb PdctRpt =>  new PdctRptDb(conn);
     }
 }

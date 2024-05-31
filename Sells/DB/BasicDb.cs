@@ -80,7 +80,14 @@ namespace Sells.DB
             db.Close();
             return result;
         }
-         protected List<string> GetStrs(string SQLstr)
+        protected int ExecSQL(string SQLstr)
+        {
+            if (db.State == ConnectionState.Closed) db.Open();
+            var result = db.Execute(SQLstr,  commandTimeout: 180, commandType: CommandType.Text);
+            db.Close();
+            return result;
+        }
+        protected List<string> GetStrs(string SQLstr)
         {
             IDbConnection db = new SqlConnection(conn);
             if (db.State == ConnectionState.Closed) db.Open();

@@ -147,6 +147,8 @@
   <ItemGroup>
     <Compile Include="DB\BasicDb.cs" />
     <Compile Include="DB\CustomerDataDb.cs" />
+    <Compile Include="DB\CustRptDb.cs" />
+    <Compile Include="DB\PdctRptDb.cs" />
     <Compile Include="DB\ProductDataDb.cs" />
     <Compile Include="DB\SellsDb.cs" />
     <Compile Include="DB\WrapperDb.cs" />
@@ -168,11 +170,11 @@
     <Compile Include="FrmSell.Designer.cs">
       <DependentUpon>FrmSell.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmStore.cs">
+    <Compile Include="FrmReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmStore.Designer.cs">
-      <DependentUpon>FrmStore.cs</DependentUpon>
+    <Compile Include="FrmReport.Designer.cs">
+      <DependentUpon>FrmReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="MdiMain.cs">
@@ -187,6 +189,8 @@
     <Compile Include="Models\Pay.cs" />
     <Compile Include="Models\PopularProduct.cs" />
     <Compile Include="Models\ProductData.cs" />
+    <Compile Include="Models\Rpt.cs" />
+    <Compile Include="Models\Searchkey.cs" />
     <Compile Include="Models\SellInProduct.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -205,8 +209,8 @@
     <EmbeddedResource Include="FrmSell.resx">
       <DependentUpon>FrmSell.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmStore.resx">
-      <DependentUpon>FrmStore.cs</DependentUpon>
+    <EmbeddedResource Include="FrmReport.resx">
+      <DependentUpon>FrmReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MdiMain.resx">
       <DependentUpon>MdiMain.cs</DependentUpon>
@@ -226,8 +230,10 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Sells.Models.CustomerData.datasource" />
+    <None Include="Properties\DataSources\Sells.Models.CustRpt.datasource" />
     <None Include="Properties\DataSources\Sells.Models.InProduct.datasource" />
     <None Include="Properties\DataSources\Sells.Models.Pay.datasource" />
+    <None Include="Properties\DataSources\Sells.Models.PdctRpt.datasource" />
     <None Include="Properties\DataSources\Sells.Models.PopularProduct.datasource" />
     <None Include="Properties\DataSources\Sells.Models.ProductData.datasource" />
     <None Include="Properties\DataSources\Sells.Models.SellInProduct.datasource" />
