@@ -12,11 +12,13 @@ namespace Sells.Models
         public string 產品編號 { set; get; }
         public string 產品名稱 { set; get; }       
         public string 數量     { set; get; }     
-        public string 單價    { set; get; }
+        public string 金額    { set; get; }
       
     }
     public class CustRpt
     {
+        public DateTime 銷貨日期 { set; get; }
+        public string 銷貨單號 { set; get; }
         public string 客戶編號 { set; get; }
         public string 客戶名稱 { set; get; }
         public string 總金額   { set; get; }

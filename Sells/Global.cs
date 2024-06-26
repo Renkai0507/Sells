@@ -10,11 +10,13 @@ namespace Sells
 {
     public static class Global
     {
+       public static AutoCompleteStringCollection AcsPdct = new AutoCompleteStringCollection();
+       public static AutoCompleteStringCollection AcsCust = new AutoCompleteStringCollection();
+       
         public static string[] StrToArray(string Str)
         {
             Str = Str.Replace("  "," ").Replace("   "," ");
-            string[] result = Str.Split(' ');
-            
+            string[] result = Str.Split(' ');            
             return result;
         }
         /// <summary>

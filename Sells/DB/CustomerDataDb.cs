@@ -28,7 +28,7 @@ namespace Sells.DB
             var dbresult = ConectSQL(Sqlstr);
             return dbresult;
         }
-        public List<CustomerData> SearchAll(string Search)
+        public List<CustomerData> LikeSearchAll(string Search)
         {
 
             string Sqlstr = $@"SELECT * FROM CustomerData 
@@ -89,6 +89,26 @@ values ('{entity.客戶編號}','{entity.客戶名稱}','{entity.公司電話}',
             string Sqlstr = $@"SELECT top 1 * FROM CustomerData where 客戶名稱 =@keyStr";
             var dbresult = ConectSQL(Sqlstr, Dp).FirstOrDefault();
             return dbresult;           
+        }
+        internal CustomerData SinglebyKey(string keyStr)
+        {
+            DynamicParameters Dp = new DynamicParameters();
+            Dp.Add("keyStr", keyStr);
+            string Sqlstr = $@"SELECT top 1 * FROM CustomerData where 客戶編號 =@keyStr";
+            var dbresult = ConectSQL(Sqlstr, Dp).FirstOrDefault();
+            return dbresult;
+        }
+
+        internal List<CustomerData> SearchAll(string Search)
+        {
+            string Sqlstr = $@"SELECT * FROM CustomerData 
+                            where  客戶名稱 like '%{Search}%' or 備註 like '%{Search}%'
+                            or 業務 like '%{Search}%' or 聯絡人 like '%{Search}%'
+                            or 地址 like '%{Search}%'
+                ";
+
+            var dbresult = ConectSQL(Sqlstr);
+            return dbresult;
         }
     }
 }

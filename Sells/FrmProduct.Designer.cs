@@ -49,7 +49,7 @@ namespace Sells
             System.Windows.Forms.Label label7;
             System.Windows.Forms.Label label8;
             this.DgvProduct = new System.Windows.Forms.DataGridView();
-            this.popularProductBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.零售價錢 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.水電價TextBox = new System.Windows.Forms.TextBox();
             this.地址TextBox = new System.Windows.Forms.TextBox();
             this.安裝價TextBox = new System.Windows.Forms.TextBox();
@@ -76,12 +76,12 @@ namespace Sells
             this.btnExit = new System.Windows.Forms.Button();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.BtnCancel = new System.Windows.Forms.Button();
+            this.popularProductBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.產品編號DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.產品規格DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.單位DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.進價價錢DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.水電價DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.零售價錢 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.安裝價DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.備註DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.進貨日期DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,7 +105,6 @@ namespace Sells
             label7 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvProduct)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popularProductBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -114,6 +113,7 @@ namespace Sells
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.popularProductBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // 水電價Label
@@ -322,9 +322,12 @@ namespace Sells
             this.DgvProduct.TabIndex = 100;
             this.DgvProduct.SelectionChanged += new System.EventHandler(this.DgvProduct_SelectionChanged);
             // 
-            // popularProductBindingSource
+            // 零售價錢
             // 
-            this.popularProductBindingSource.DataSource = typeof(Sells.Models.PopularProduct);
+            this.零售價錢.DataPropertyName = "零售價錢";
+            this.零售價錢.HeaderText = "零售價錢";
+            this.零售價錢.Name = "零售價錢";
+            this.零售價錢.ReadOnly = true;
             // 
             // 水電價TextBox
             // 
@@ -412,6 +415,8 @@ namespace Sells
             // 
             // txtSearch
             // 
+            this.txtSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtSearch.Location = new System.Drawing.Point(90, 43);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(158, 27);
@@ -622,6 +627,10 @@ namespace Sells
             this.BtnCancel.UseVisualStyleBackColor = false;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
+            // popularProductBindingSource
+            // 
+            this.popularProductBindingSource.DataSource = typeof(Sells.Models.PopularProduct);
+            // 
             // 產品編號DataGridViewTextBoxColumn
             // 
             this.產品編號DataGridViewTextBoxColumn.DataPropertyName = "產品編號";
@@ -656,13 +665,6 @@ namespace Sells
             this.水電價DataGridViewTextBoxColumn.HeaderText = "水電價";
             this.水電價DataGridViewTextBoxColumn.Name = "水電價DataGridViewTextBoxColumn";
             this.水電價DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // 零售價錢
-            // 
-            this.零售價錢.DataPropertyName = "零售價錢";
-            this.零售價錢.HeaderText = "零售價錢";
-            this.零售價錢.Name = "零售價錢";
-            this.零售價錢.ReadOnly = true;
             // 
             // 安裝價DataGridViewTextBoxColumn
             // 
@@ -734,7 +736,6 @@ namespace Sells
             this.Load += new System.EventHandler(this.FrmProduct_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmProduct_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.DgvProduct)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popularProductBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -751,6 +752,7 @@ namespace Sells
             this.tableLayoutPanel6.PerformLayout();
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.popularProductBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

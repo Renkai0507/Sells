@@ -29,8 +29,10 @@ namespace Sells
         {
             this.WindowState = FormWindowState.Maximized;
             //dt = Db.ProductData.TurnTable(Db.ProductData.GetAll());
+            txtSearch.AutoCompleteCustomSource = Global.AcsCust;
             Allcustomer = Db.CustomerData.GetAll();
             dgvcustomer.DataSource = Allcustomer;
+           
         }
 
         private void BtnNew_Click(object sender, EventArgs e)
@@ -277,14 +279,31 @@ namespace Sells
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            Allcustomer.Clear();
             if (string.IsNullOrWhiteSpace(txtSearch.Text.Trim()))
             {
                 Allcustomer = Db.CustomerData.GetAll();
                 dgvcustomer.DataSource = Allcustomer;
                 return;
             }
-            Allcustomer = Db.CustomerData.SearchAll(txtSearch.Text.Trim());
+            var single = Db.CustomerData.SinglebyName(txtSearch.Text.Trim());
+            if (single!=null)
+            {
+                Allcustomer.Add(single);
+            }
+            
+            if (Allcustomer.Count == 0)
+            {
+                Allcustomer = Db.CustomerData.SearchAll(txtSearch.Text.Trim());            
+            }
+
+            if (Allcustomer.Count==0)
+            {
+                Allcustomer = Db.CustomerData.LikeSearchAll(txtSearch.Text.Trim());
+            }
+            dgvcustomer.DataSource = null;
             dgvcustomer.DataSource = Allcustomer;
+            dgvcustomer.Refresh();
         }
 
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)

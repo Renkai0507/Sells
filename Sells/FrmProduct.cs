@@ -28,7 +28,8 @@ namespace Sells
         private void DefaultSet()
         {
             this.WindowState = FormWindowState.Maximized;
-            //dt = Db.ProductData.TurnTable(Db.ProductData.GetAll());
+            //dt = Db.ProductData.TurnTable(Db.ProductData.GetAll());            
+            txtSearch.AutoCompleteCustomSource = Global.AcsPdct;
             Allprodct = Db.ProductData.GetAll();
             DgvProduct.DataSource = Allprodct;
             進價價錢TextBox.TextChanged += delegate { Global.Numberonly(進價價錢TextBox); };
@@ -228,12 +229,20 @@ namespace Sells
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
+            int selectcnt= DgvProduct.SelectedRows.Count;
+            if (selectcnt <= 0) return;
             DialogResult dialog = new DialogResult();
-            dialog = MessageBox.Show($"確定要刪除{prodct.產品規格}({prodct.產品編號})?", "刪除提醒", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (dialog == DialogResult.Yes && prodct != null)
+            dialog = MessageBox.Show($"確定要刪除{selectcnt}筆產品?", "刪除提醒", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialog != DialogResult.Yes && prodct != null)
             {
-                Db.ProductData.Delete(prodct);
+                return;
             }
+            for (int i = 0; i < selectcnt; i++)
+            {
+                var pdct =(PopularProduct) DgvProduct.SelectedRows[i].DataBoundItem;
+                Db.ProductData.Delete(pdct);
+            }
+           
         }
 
 
@@ -268,14 +277,39 @@ namespace Sells
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            Allprodct.Clear();
             if (string.IsNullOrWhiteSpace(txtSearch.Text.Trim()))
             {
                 Allprodct = Db.ProductData.GetAll();
                 DgvProduct.DataSource = Allprodct;
                 return;
             }
-            Allprodct = Db.ProductData.SearchAll(txtSearch.Text.Trim());
+            var single = Db.ProductData.SinglebyName(txtSearch.Text.Trim());
+            if (single != null)
+            {
+                Allprodct.Add(single);
+            }
+
+            if (Allprodct.Count == 0)
+            {
+                Allprodct = Db.ProductData.SearchAll(txtSearch.Text.Trim());
+            }
+
+            if (Allprodct.Count == 0)
+            {
+                Allprodct = Db.ProductData.LikeSearchAll(txtSearch.Text.Trim());
+            }
+            DgvProduct.DataSource = null;
             DgvProduct.DataSource = Allprodct;
+            DgvProduct.Refresh();
+            //if (string.IsNullOrWhiteSpace(txtSearch.Text.Trim()))
+            //{
+            //    Allprodct = Db.ProductData.GetAll();
+            //    DgvProduct.DataSource = Allprodct;
+            //    return;
+            //}
+            //Allprodct = Db.ProductData.SearchAll(txtSearch.Text.Trim());
+            //DgvProduct.DataSource = Allprodct;
 
         }
 

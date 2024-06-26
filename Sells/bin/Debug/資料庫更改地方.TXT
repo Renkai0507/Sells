@@ -1,0 +1,11 @@
+ProductData 刪除 庫存量欄位
+
+PercentTable 更改  燈飾-->經銷 水電-->設計師  設計師-->客人
+
+SellInProduct 刪除 票現欄位  更改 現金價欄位為小計欄位 新增 成本欄位
+
+Pay 刪除 現金價欄位 新增 實收金額欄位 明細欄位 銷貨日期欄位格式改成 日期/時間
+
+EmployeeData 新增
+
+CustomerData 新增 屬性欄位

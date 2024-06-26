@@ -47,7 +47,7 @@ namespace Sells.DB
             var dbresult = ConectSQL(Sqlstr);
             return dbresult;
         }
-        public List<PopularProduct> SearchAll(string Search)
+        public List<PopularProduct> LikeSearchAll(string Search)
         {
 
             string Sqlstr = $@"SELECT * FROM PopularProduct 
@@ -92,6 +92,18 @@ values ({entity.產品編號},{entity.產品規格},{entity.單位},{entity.進�
         public DataTable TurnTable(List<PopularProduct> lst)
         {
             return ListConvertDataTable(lst);
+        }
+
+        internal List<PopularProduct> SearchAll(string Search)
+        {
+            string Sqlstr = $@"SELECT * FROM PopularProduct 
+                            where  產品規格 Like '%{Search}%' or 備註 Like '%{Search}%'
+or 單位 Like '%{Search}%' or 地址 Like '%{Search}%'
+"//--產品規格 like '%{Search}%' or 備註 like '%{Search}%'  or 地址 like '%{Search}%' 
+;
+
+            var dbresult = ConectSQL(Sqlstr);
+            return dbresult;
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Sells.Models
 {
     public class Searchkey
     {
-        public string SearchStr { set; get; }
+        public string SearchCust { set; get; }
+        public string SearchPdct { set; get; }
         public string StartDay { set; get; }
         public string EndDay { set; get; }
     }

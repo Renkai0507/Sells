@@ -20,11 +20,31 @@ namespace Sells.DB
             Dp.Add("EndDay", key.EndDay);
             string Sqlstr = $@"
              
-                    SELECT  產品編號,光源 as 產品名稱,SUM(數量) as 數量,
-        SUM(金額) as 單價 ,SUM(總金額) as 總金額
+                    SELECT  產品編號,光源 as 產品名稱,數量 as 數量,
+        金額 as 單價 ,小計 as 總金額
         FROM SellInProduct 
-        where 銷貨日期>=@StartDay and 銷貨日期<=@EndDay         
-        group by 產品編號,光源
+        where 銷貨日期>=@StartDay and 銷貨日期<=@EndDay and 光源<>''
+       
+
+                    ";
+            var dbresult = ConectSQL(Sqlstr, Dp);
+            return dbresult;
+            //group by 產品編號,光源,總金額
+        }
+
+        internal List<PdctRpt> SearchByDate(Searchkey search)
+        {
+            DynamicParameters Dp = new DynamicParameters();
+            Dp.Add("StartDay", search.StartDay);
+            Dp.Add("EndDay", search.EndDay);
+            Dp.Add("SearchStr", search.SearchPdct);
+            string Sqlstr = $@"
+                SELECT  產品編號,光源 as 產品名稱,數量 as 數量,
+        金額 as 金額 ,小計 as 總金額
+        FROM SellInProduct 
+        where 銷貨日期>=@StartDay and 銷貨日期<=@EndDay and 光源=@SearchStr      
+       
+        
 
                     ";
             var dbresult = ConectSQL(Sqlstr, Dp);

@@ -29,7 +29,7 @@ namespace Sells
             this.Db = Db;
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
-            dtpSellin.Value = DateTime.Now.AddMonths(-6);
+            //dtpSellin.Value = DateTime.Now.AddMonths(-6);
             DefaultSet();
         }
 
@@ -40,20 +40,15 @@ namespace Sells
             MastSells = Db.Sells.GetAllByDate(dtpSellin.Value);
             AddNewSells = new List<SellInProduct>();
             dgvSellsMonth.DataSource = MastSells;
-            AutoCompleteStringCollection AcsPdct=new AutoCompleteStringCollection();
-            AutoCompleteStringCollection AcsCust = new AutoCompleteStringCollection();
-            AutoPdct = Db.ProductData.GetAllAuto();
-            AutoCust = Db.CustomerData.GetAllAuto();
-            AcsPdct.AddRange(AutoPdct.Select(X=>X.產品規格).ToArray());
-            AcsCust.AddRange(AutoCust.Select(X=>X.客戶名稱).ToArray());
-            txtSearchCus.AutoCompleteCustomSource = AcsCust;
-            txtSearchPdct.AutoCompleteCustomSource = AcsPdct;
-            客戶名稱TextBox.AutoCompleteCustomSource = AcsCust;
-            光源TextBox.AutoCompleteCustomSource = AcsPdct;
+           
+            txtSearchCus.AutoCompleteCustomSource =  Global.AcsCust;
+            txtSearchPdct.AutoCompleteCustomSource = Global.AcsPdct;
+            客戶名稱TextBox.AutoCompleteCustomSource = Global.AcsCust;
+            光源TextBox.AutoCompleteCustomSource = Global.AcsPdct;
             
             金額TextBox.TextChanged += delegate { Global.Numberonly(金額TextBox); };
             小計TextBox.TextChanged += delegate { Global.Numberonly(小計TextBox); };
-            總金額TextBox.TextChanged += delegate { Global.Numberonly(總金額TextBox); };
+            單價TextBox.TextChanged += delegate { Global.Numberonly(單價TextBox); };
 
             rdbClient.CheckedChanged += delegate { SetPriceType(); };
             rdbPro.CheckedChanged += delegate { SetPriceType(); };
@@ -87,8 +82,8 @@ namespace Sells
             銷貨單號TextBox.Text = DateTime.Now.ToString("yyyyMMddHHmmss");
             //客戶編號TextBox.Text = "";
             //客戶名稱TextBox.Text = "";
-            小計TextBox.Text = "";
-            總金額TextBox.Text = "";
+            小計TextBox.Text = "0";
+            金額TextBox.Text = "0";
             發票編號TextBox.Text = "";
             備註TextBox.Text = "";
             //產品備註TextBox.Text = "";
@@ -109,7 +104,7 @@ namespace Sells
             dgvSellsMonth.FirstDisplayedScrollingRowIndex=dgvSellsMonth.RowCount-1;
             dgvSellsMonth.Rows[dgvSellsMonth.RowCount - 1].Selected = true;
             dgvSells.DataSource = null;
-
+            產品編號TextBox.Focus();
         }
         private void BtnNewPdct_Click(object sender, EventArgs e)
         {
@@ -118,12 +113,14 @@ namespace Sells
                 BtnNewMast.PerformClick();
             SelectPdct = GetnewSell();
             AddNewSells.Add(SelectPdct);
-            SetTotalPrice(SelectPdct.銷貨單號);
+            小計TextBox.Text = SetTotalPrice(銷貨單號TextBox.Text.Trim());            
+            
             dgvSells.DataSource = null;
             dgvSells.DataSource = AddNewSells;
             dgvSells.Refresh();
             BtnSave.Enabled = true;
             BtnCancel.Enabled = true;
+            SelectPdct = null;
         }
 
         private SellInProduct GetnewSell()
@@ -139,6 +136,7 @@ namespace Sells
                 安裝價=安裝價TextBox.Text,
                 小計=小計TextBox.Text,
                 數量=數量TextBox.Text,
+                單價=單價TextBox.Text,
                 發票編號=發票編號TextBox.Text,
                 水電價=水電價TextBox.Text,
                 產品備註=產品備註TextBox.Text,
@@ -146,7 +144,29 @@ namespace Sells
                 零售價=零售價TextBox.Text,
                 備註=備註TextBox.Text,                
             };
-            return sell;
+             return sell;
+        }
+        private SellInProduct SetSell(SellInProduct pdct)
+        {
+                 銷貨日期DateTimePicker.Value= pdct.銷貨日期;
+                 銷貨單號TextBox.Text        = pdct.銷貨單號;
+                 客戶名稱TextBox.Text        = pdct.客戶名稱;
+                 客戶編號TextBox.Text        = pdct.客戶編號;
+                 光源TextBox.Text            = pdct.光源   ;
+                 金額TextBox.Text            = pdct.金額   ;
+                 安裝價TextBox.Text         = pdct.安裝價   ;
+                單價TextBox.Text            = pdct.單價    ;
+                數量TextBox.Text            = pdct.數量    ;
+                 發票編號TextBox.Text       = pdct.發票編號 ;
+                 水電價TextBox.Text         = pdct.水電價   ;
+                 產品備註TextBox.Text       = pdct.產品備註 ;
+                 產品編號TextBox.Text       = pdct.產品編號 ;
+            小計TextBox.Text = pdct.小計;
+            零售價TextBox.Text = pdct.零售價;
+            備註TextBox.Text = pdct.備註;
+
+
+            return pdct;
         }
 
         private void dgvSellsMonth_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -169,11 +189,13 @@ namespace Sells
             {
                 dgvSells.DataSource = null;
             }
-            if (dgvSells.RowCount>=0)
+            if (dgvSells.RowCount>0)
             {
                 //dgvSells.Rows[0].Selected = true;
-                SelectPdct = (SellInProduct)dgvSells.SelectedRows[0].DataBoundItem;
-                sellInProductBindingSource.DataSource = SelectPdct;
+                SelectPdct = (SellInProduct)dgvSells.Rows[0].DataBoundItem;
+               
+                //sellInProductBindingSource.DataSource = SelectPdct;
+                GetnewSell();
                 BtnSave.Enabled = true;
             }
             
@@ -186,7 +208,8 @@ namespace Sells
                 return;
             }
             SelectPdct =(SellInProduct) dgvSells.SelectedRows[0].DataBoundItem;
-            sellInProductBindingSource.DataSource = SelectPdct;
+            //sellInProductBindingSource.DataSource = SelectPdct;
+            SetSell(SelectPdct);
             BtnSave.Enabled = true;
 
         }
@@ -250,8 +273,8 @@ namespace Sells
             int Price = 0;
             int.TryParse(QtyStr,out Qty);
             int.TryParse(PriceStr, out Price);
-            金額TextBox.Text = Price.ToString();
-            小計TextBox.Text = (Qty * Price).ToString();
+            單價TextBox.Text = Price.ToString();
+            金額TextBox.Text = (Qty * Price).ToString();
 
 
         }
@@ -261,9 +284,9 @@ namespace Sells
             List<string> allprice;
             var sellstotal = Db.Sells.GetPdcByKey(SnNo);
             //舊的資料算總價
-            if (sellstotal!=null)
+            if (sellstotal.Count>0)
             {
-                allprice= sellstotal.Select(X=>X.小計).ToList();
+                allprice= sellstotal.Select(X=>X.金額).ToList();
                 for (int i = 0; i < allprice.Count(); i++)
                 {
                     int tmpprice = 0;
@@ -275,14 +298,14 @@ namespace Sells
             else
             {
                 //新加的算總價
-                allprice = AddNewSells.Select(X => X.小計).ToList();
+                allprice = AddNewSells.Select(X => X.金額).ToList();
                 for (int i = 0; i < allprice.Count(); i++)
                 {
                     int tmpprice = 0;
                     int.TryParse(allprice[i], out tmpprice);
                     result = (int.Parse(result) + tmpprice).ToString();
                 }
-                AddNewSells.Where(X => X.銷貨單號 == SnNo).ToList().ForEach(Y => { Y.總金額 = result; });
+                AddNewSells.Where(X => X.銷貨單號 == SnNo).ToList().ForEach(Y => { Y.小計 = result; });
             }
             return result;
             
@@ -294,7 +317,7 @@ namespace Sells
             else if (rdbClient.Checked == true)
                 pricetype = 價格類別.零售價;
             else if (rdbPro.Checked == true)
-                pricetype = 價格類別.安裝價;
+                pricetype = 價格類別.水電價;
         }
 
         private void 零售價TextBox_TextChanged(object sender, EventArgs e)
@@ -361,7 +384,7 @@ namespace Sells
                 Db.Sells.Edit(SelectPdct);
             }
             AddNewSells.Clear();
-            SetTotalPrice(SelectPdct.銷貨單號);
+            SetTotalPrice(銷貨單號TextBox.Text);
             MastSells = Db.Sells.GetAllByDate(dtpSellin.Value);
             dgvSellsMonth.DataSource = MastSells;
             dgvSells.DataSource = null;
@@ -385,8 +408,12 @@ namespace Sells
             }
             if (e.KeyCode == Keys.Q)
             {
-                    BtnNewMast.PerformClick();
+                BtnNewMast.PerformClick();
+                if (客戶名稱TextBox.Text.Trim()=="")
+                {
                     客戶名稱TextBox.Focus();
+                }
+               
             }
             if (e.KeyCode == Keys.W)
             {
@@ -492,7 +519,18 @@ namespace Sells
 
         private void BtnPrint_Click(object sender, EventArgs e)
         {
-
+            List<SellInProduct> Custsells = new List<SellInProduct>();
+            if (dgvSells.RowCount<=0)
+            {
+                return;
+            }
+            for (int i = 0; i < dgvSells.RowCount; i++)
+            {
+               var data= (SellInProduct)dgvSells.Rows[i].DataBoundItem;
+                Custsells.Add(data);
+            }
+            CustReport frm = new CustReport(Custsells,Db);
+            frm.Show();
         }
 
         private void dtpSellin_ValueChanged(object sender, EventArgs e)
@@ -531,6 +569,51 @@ namespace Sells
             {
                 CountPrice(安裝價TextBox.Text);
             }
+        }
+
+        private void 客戶編號TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+            {
+                return;
+            }
+            string KeyStr = 客戶編號TextBox.Text.Trim();
+            CustomerData cust = Db.CustomerData.SinglebyKey(KeyStr);
+            if (cust != null)
+            {
+                客戶名稱TextBox.Text = cust.客戶名稱;
+                客戶編號TextBox.Text = cust.客戶編號;
+            }
+        }
+
+       
+
+        private void 產品編號TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+            {
+                return;
+            }
+            string KeyStr = 產品編號TextBox.Text.Trim();
+            PopularProduct pdct = Db.ProductData.SinglebyKey(KeyStr);
+            if (pdct != null)
+            {
+                客戶名稱TextBox.Text = pdct.產品編號;
+                客戶編號TextBox.Text = pdct.產品規格;
+            }
+        }
+
+        private void BtnCLear_Click(object sender, EventArgs e)
+        {
+            光源TextBox.Text = "";
+            金額TextBox.Text = "0";
+            安裝價TextBox.Text = "0";
+            小計TextBox.Text = "0";
+            數量TextBox.Text = "0";            
+            水電價TextBox.Text = "0";
+            產品備註TextBox.Text = "";
+            產品編號TextBox.Text = "";
+            零售價TextBox.Text = "0";            
         }
     }
 }

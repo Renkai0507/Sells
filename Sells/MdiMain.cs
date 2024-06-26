@@ -19,6 +19,10 @@ namespace Sells
             Db = new DbServiceWrapper();
             InitializeComponent();
             this.Text = this.Text + "[版本日期:" + System.IO.File.GetLastWriteTime(this.GetType().Assembly.Location).ToString("yyyy/MM/dd HH:mm:ss") + "]";
+            var AutoPdct = Db.ProductData.GetAllAuto();
+            var AutoCust = Db.CustomerData.GetAllAuto();
+            Global.AcsPdct.AddRange(AutoPdct.Select(X => X.產品規格).ToArray());
+            Global.AcsCust.AddRange(AutoCust.Select(X => X.客戶名稱).ToArray());
         }
         private void newPage(Form sonfrm)
         {

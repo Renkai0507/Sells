@@ -29,6 +29,21 @@ namespace Sells.DB
             var dbresult = ConectSQL(Sqlstr, Dp);
             return dbresult;
         }
+        public List<SellInProduct> SearchByCust(Searchkey key)
+        {
+
+            DynamicParameters Dp = new DynamicParameters();
+            Dp.Add("StartDay", key.StartDay);
+            Dp.Add("EndDay", key.EndDay);
+            Dp.Add("SearchStr", key.SearchCust);
+            string Sqlstr = $@"
+                    SELECT distinct *
+        FROM SellInProduct 
+        where 銷貨日期>=@StartDay and 銷貨日期<=@EndDay and 客戶名稱=@SearchStr
+                    ";
+            var dbresult = ConectSQL(Sqlstr, Dp);
+            return dbresult;
+        }
         
 
 
@@ -63,8 +78,8 @@ namespace Sells.DB
             string SnNo = GetSnno(entity);
             string DateStr = $@"{entity.銷貨日期.Year}/{entity.銷貨日期.Month}/{entity.銷貨日期.Day}";
             string Sqlstr = $@"Insert into SellInProduct 
-(銷貨單號,項次,銷貨日期,客戶編號,客戶名稱,總金額,備註,產品編號,光源,數量,水電價,安裝價,零售價,金額,牌價,小計,產品備註,成本,發票編號)
-values ('{entity.銷貨單號}',{SnNo},'{DateStr}','{entity.客戶編號}','{entity.客戶名稱}','{entity.總金額}','{entity.備註}'
+(銷貨單號,項次,銷貨日期,客戶編號,客戶名稱,單價,備註,產品編號,光源,數量,水電價,安裝價,零售價,金額,牌價,小計,產品備註,成本,發票編號)
+values ('{entity.銷貨單號}',{SnNo},'{DateStr}','{entity.客戶編號}','{entity.客戶名稱}','{entity.單價}','{entity.備註}'
 ,'{entity.產品編號}','{entity.光源}','{entity.數量}','{entity.水電價}','{entity.安裝價}',
 '{entity.零售價}','{entity.金額}','{entity.牌價}','{entity.小計}','{entity.產品備註}','{entity.成本}','{entity.發票編號}')
 ";
@@ -98,7 +113,7 @@ values ('{entity.銷貨單號}',{SnNo},'{DateStr}','{entity.客戶編號}','{ent
             
             string DateStr = $@"{entity.銷貨日期.Year}/{entity.銷貨日期.Month}/{entity.銷貨日期.Day}";
             string Sqlstr = $@"UPDATE SellInProduct Set 銷貨日期='{DateStr}',
-                            客戶編號='{entity.客戶編號}',客戶名稱='{entity.客戶名稱}',總金額='{entity.總金額}',備註='{entity.備註}',產品編號='{entity.產品編號}',光源='{entity.光源}',數量='{entity.數量}',
+                            客戶編號='{entity.客戶編號}',客戶名稱='{entity.客戶名稱}',單價='{entity.單價}',備註='{entity.備註}',產品編號='{entity.產品編號}',光源='{entity.光源}',數量='{entity.數量}',
                             水電價='{entity.水電價}',安裝價='{entity.安裝價}',零售價='{entity.零售價}',金額='{entity.金額}',小計='{entity.小計}'
                             ,產品備註='{entity.產品備註}',成本='{entity.成本}',發票編號='{entity.發票編號}'
 WHERE 銷貨單號='{entity.銷貨單號}' and 項次='{entity.項次}'";
@@ -133,7 +148,7 @@ WHERE 銷貨單號='{entity.銷貨單號}' and 項次='{entity.項次}'";
         internal void SetTotal(string snNo, string result)
         {
            
-            string Sqlstr = $@"UPDATE SellInProduct Set 總金額='{result}'
+            string Sqlstr = $@"UPDATE SellInProduct Set 小計='{result}'
 WHERE 銷貨單號='{snNo}'";
             int dbresult = ExecSQL(Sqlstr);
            

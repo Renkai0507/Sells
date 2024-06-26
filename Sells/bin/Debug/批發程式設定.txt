@@ -1,0 +1,19 @@
+在C:下面
+
+建立三個檔案
+lihgt_config.txt  照片路徑
+db_config.txt  資料庫路徑
+backup_conifg 備份資料庫路徑
+
+再進入程式裡面指定路徑即可
+圖片指定路徑 為 D:\lightpic 
+
+
+如果程式無法開啟 請安裝 光碟中的
+dotnetfx.exe
+跟
+CRRedist2005_x86.exe 
+
+安裝完後即可以開啟
+
+程式路徑 D:\祥宏批發\Sell\Sell\bin\Debug\Sell.exe
